@@ -8,4 +8,5 @@ app.listen(envKeys.port, async () => {
   await connectDb();
   console.log("http://localhost:", envKeys.port);
   console.log(" add development branch in github");
+  console.log(" add staging branch in github");
 });
