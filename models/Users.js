@@ -20,7 +20,7 @@ const UsersSchema = new mongoose.Schema(
     timestamps: true,
     versionKey: false,
   }
-);
+);      
 
 const Users = mongoose.model("Users", UsersSchema);
 
