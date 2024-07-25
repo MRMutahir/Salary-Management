@@ -1,3 +1,5 @@
 /node_modules
 .env
 /logs
+/logs/error.log
+/logs/info.log

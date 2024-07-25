@@ -3,6 +3,7 @@ import { login, register } from "../controllers/auth.js";
 import { check } from "express-validator";
 import { validate } from "../middlewares/validate.js";
 
+
 const authRoutes = express.Router();
 
 authRoutes.post(
@@ -20,6 +21,7 @@ authRoutes.post(
   validate,
   login
 );
+
 
 
 export { authRoutes };

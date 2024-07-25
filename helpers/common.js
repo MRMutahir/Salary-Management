@@ -2,6 +2,8 @@ import pkg from "log4js";
 import pino from "pino";
 import PinoColada from "pino-colada";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
+import { saveToken } from "../services/tokenService.js";
 const { getLogger, configure } = pkg;
 
 configure({
@@ -67,14 +69,26 @@ const hashPassword = async (password) => {
 const comparePassword = async (password, hashPassword) => {
   const isMatch = await bcrypt.compareSync(password, hashPassword);
   if (isMatch) {
-    // res.status(200).json({ message: "Login successful" });
     console.log("isMatLogin successfulch", isMatch);
-    return isMatch
+    return isMatch;
   } else {
-    // res.status(401).json({ error: "Invalid credentials" });
     console.log("Invalid credentials", isMatch);
   }
 };
+
+const accountVerificationCodeByEmail = async (userId) => {
+  const buffer = crypto.randomBytes(3);
+  const code = parseInt(buffer.toString("hex"), 16).toString().slice(0, 6);
+
+  const token = await saveToken({
+    userID: userId,
+    token: code,
+    tokenType: "email-token",
+  });
+
+  return token.token;
+};
+
 export {
   prettyLog,
   prettyErrorLog,
@@ -82,4 +96,5 @@ export {
   sendResponse,
   hashPassword,
   comparePassword,
+  accountVerificationCodeByEmail,
 };
