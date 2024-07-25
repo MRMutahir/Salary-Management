@@ -1,6 +1,7 @@
 import pkg from "log4js";
 import pino from "pino";
 import PinoColada from "pino-colada";
+import bcrypt from "bcrypt";
 const { getLogger, configure } = pkg;
 
 configure({
@@ -33,7 +34,6 @@ const logger = pino({
   prettifier: PinoColada,
 });
 
-
 const prettyLog = (msg, label = "info") => {
   if (label === null) infoLogger.info(msg);
   else logger.info(label + " :>> " + msg);
@@ -49,4 +49,37 @@ const log2File = (msg, type) => {
   logger4js[type](msg);
 };
 
-export { prettyLog, prettyErrorLog, log2File };
+const sendResponse = async (
+  res,
+  message,
+  success = true,
+  code = 200,
+  data = null
+) => {
+  return res.status(code).json({ message, success, data });
+};
+
+const hashPassword = async (password) => {
+  const salt = await bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(password, salt);
+};
+
+const comparePassword = async (password, hashPassword) => {
+  const isMatch = await bcrypt.compareSync(password, hashPassword);
+  if (isMatch) {
+    // res.status(200).json({ message: "Login successful" });
+    console.log("isMatLogin successfulch", isMatch);
+    return isMatch
+  } else {
+    // res.status(401).json({ error: "Invalid credentials" });
+    console.log("Invalid credentials", isMatch);
+  }
+};
+export {
+  prettyLog,
+  prettyErrorLog,
+  log2File,
+  sendResponse,
+  hashPassword,
+  comparePassword,
+};
