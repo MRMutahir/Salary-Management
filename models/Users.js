@@ -15,12 +15,24 @@ const UsersSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minlength: [15, "Password must be at least 15 characters long"],
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isEnabled: {
+      type: Boolean,
+      default: true,
+    },
+    isEnabled: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
     versionKey: false,
   }
-);      
+);
 
 const Users = mongoose.model("Users", UsersSchema);
 

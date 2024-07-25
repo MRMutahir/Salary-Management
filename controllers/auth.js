@@ -1,37 +1,45 @@
 import {
+  accountVerificationCodeByEmail,
   comparePassword,
   hashPassword,
   sendResponse,
 } from "../helpers/common.js";
-import { registerUser, findUser } from "../services/auth.js";
+import { registerUser } from "../services/auth.js";
+import { findUser } from "../services/users.js";
 
 const register = async (req, res, next) => {
   const { email, password } = req.body;
-  
+
   if (!email) {
-      return sendResponse(res, "Email is required", false, 400);
+    return sendResponse(res, "Email is required", false, 400);
   }
 
   if (!password) {
-      return sendResponse(res, "Password is required", false, 400);
+    return sendResponse(res, "Password is required", false, 400);
   }
-  console.log('password', password)
+  console.log("password", password);
+  console.log("email", email);
 
   try {
-      const existingUser = await findUser({ email });
-      if (existingUser) {
-          return sendResponse(res, "Please choose another email address because this email is already in use.", false, 409);
-      }
-      const secretPassword = await hashPassword(password);
-      const user = await registerUser({ email, password: secretPassword });
-
-      if (user) {
-          return sendResponse(res, "User registered successfully", true, 201);
-      } else {
-          return sendResponse(res, "Registration failed", false, 500);
-      }
+    const existingUser = await findUser({ email });
+    if (existingUser) {
+      return sendResponse(
+        res,
+        "Please choose another email address because this email is already in use.",
+        false,
+        409
+      );
+    }
+    const secretPassword = await hashPassword(password);
+    const user = await registerUser({ email, password: secretPassword });
+    const verificationCode = await accountVerificationCodeByEmail(user._id);
+    if (user) {
+      return sendResponse(res, `User registered successfully`, true, 201,verificationCode);
+    } else {
+      return sendResponse(res, "Registration failed", false, 500);
+    }
   } catch (error) {
-      next(error);
+    next(error);
   }
 };
 
