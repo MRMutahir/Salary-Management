@@ -17,6 +17,7 @@
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "log4js": "^6.9.1",
+    "mailtrap": "^3.4.0",
     "mongoose": "^8.5.1",
     "nodemon": "^3.1.4",
     "pino": "^9.3.1",
