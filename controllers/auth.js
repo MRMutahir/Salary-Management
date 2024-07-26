@@ -46,12 +46,7 @@ const register = async (req, res, next) => {
       emailPayload.category
     );
     if (user) {
-      return sendResponse(
-        res,
-        `User registered successfully`,
-        true,
-        201
-      );
+      return sendResponse(res, `User registered successfully`, true, 201);
     } else {
       return sendResponse(res, "Registration failed", false, 500);
     }
@@ -62,6 +57,8 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
+  if (!email) sendResponse(res, "Enter a valid email", false, 404);
+  if (!email) sendResponse(res, "Enter a valid password", false, 404);
 
   try {
     const user = await findUser({ email });
@@ -82,5 +79,7 @@ const login = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 export { register, login };
