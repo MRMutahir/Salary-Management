@@ -89,6 +89,19 @@ const accountVerificationCodeByEmail = async (userId) => {
   return token.token;
 };
 
+const generateResetPasswordToken = async (userId) => {
+  const buffer = crypto.randomBytes(3);
+  const code = parseInt(buffer.toString("hex"), 16).toString().slice(0, 6);
+
+  const token = await saveToken({
+    userID: userId,
+    token: code,
+    tokenType: "reset-password-token",
+  });
+
+  return token.token;
+};
+
 export {
   prettyLog,
   prettyErrorLog,
@@ -97,4 +110,5 @@ export {
   hashPassword,
   comparePassword,
   accountVerificationCodeByEmail,
+  generateResetPasswordToken,
 };
