@@ -4,6 +4,7 @@ import {
   hashPassword,
   sendResponse,
 } from "../helpers/common.js";
+import { sendEmail } from "../helpers/mailtrap.js";
 import { registerUser } from "../services/auth.js";
 import { findUser } from "../services/users.js";
 
@@ -33,8 +34,24 @@ const register = async (req, res, next) => {
     const secretPassword = await hashPassword(password);
     const user = await registerUser({ email, password: secretPassword });
     const verificationCode = await accountVerificationCodeByEmail(user._id);
+    const emailPayload = {
+      obj: "Account Verification",
+      code: verificationCode,
+      category: "account verification email",
+    };
+    await sendEmail(
+      user.email,
+      emailPayload.obj,
+      emailPayload.code,
+      emailPayload.category
+    );
     if (user) {
-      return sendResponse(res, `User registered successfully`, true, 201,verificationCode);
+      return sendResponse(
+        res,
+        `User registered successfully`,
+        true,
+        201
+      );
     } else {
       return sendResponse(res, "Registration failed", false, 500);
     }
