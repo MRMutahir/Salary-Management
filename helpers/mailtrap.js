@@ -1,14 +1,17 @@
-import express from "express";
 import { MailtrapClient } from "mailtrap";
 import { envKeys } from "../config/keys.js";
-
 
 const TOKEN = envKeys.MAILTRAP_TOKEN;
 const ENDPOINT = envKeys.MAILTRAP_ENDPOINT;
 
 const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
-const sendEmail = async (recipientsEmail, EmailObject, EmailData, EmailCategory) => {
+const sendEmail = async (
+  recipientsEmail,
+  EmailObject,
+  EmailData,
+  EmailCategory
+) => {
   const sender = {
     email: "mailtrap@demomailtrap.com",
     name: "Muhammad Mutahir",
@@ -23,7 +26,6 @@ const sendEmail = async (recipientsEmail, EmailObject, EmailData, EmailCategory)
     await client.send({
       from: sender,
       to: recipients,
-    //   to: "mutahirkareem820@gmail.com",
       subject: EmailObject,
       text: EmailData,
       category: EmailCategory,
