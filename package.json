@@ -5,16 +5,22 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "dotenvx run -- node index.js",
-    "dev": "dotenvx run -- nodemon index.js"
+    "start": "dotenvx run -- node index.js | pino-colada",
+    "dev": "dotenvx run -- nodemon index.js | pino-colada"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@dotenvx/dotenvx": "^1.6.4",
+    "bcrypt": "^5.1.1",
     "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "log4js": "^6.9.1",
+    "mailtrap": "^3.4.0",
     "mongoose": "^8.5.1",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "pino": "^9.3.1",
+    "pino-colada": "^2.2.2"
   }
 }
