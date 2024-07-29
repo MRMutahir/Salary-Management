@@ -1,10 +1,12 @@
 import {
   generateResetPasswordToken,
+  generateToken,
   hashPassword,
   sendResponse,
 } from "../helpers/common.js";
 import { deleteToken, findToken } from "../services/tokenService.js";
 import { findUser, findUserAndUpdate } from "../services/users.js";
+import mongoose from "mongoose";
 
 const accountVerification = async (req, res, next) => {
   const { email, code } = req.body;
@@ -29,22 +31,41 @@ const accountVerification = async (req, res, next) => {
     // after isVerifiedUser delete token
     await deleteToken(token);
     // Send success response
-    sendResponse(res, "You are now verified", true, 200);
+    return sendResponse(res, "You are now verified", true, 200);
   } catch (error) {
     console.error(`Error during account verification: ${error}`);
-    sendResponse(res, "Internal Server Error", false, 500);
+    return sendResponse(res, "Internal Server Error", false, 500);
   }
 };
 
 const resetPasswordToken = async (req, res, next) => {
   const { email } = req.body;
-  if (!email) sendResponse(res, "Enter a valid email", false, 404);
-  const user = await findUser({ email });
-  if (user) {
+
+  // Validate email
+  if (!email) {
+    return sendResponse(res, "Enter a valid email", true, 400);
+  }
+
+  try {
+    // Find user by email
+    const user = await findUser({ email });
+
+    // User not found
+    if (!user) {
+      return sendResponse(res, "You are not an authenticated user", true, 404);
+    }
+
+    // Generate reset password token
     const token = await generateResetPasswordToken(user._id);
-    sendResponse(res, "Your reset password token", true, 200, token);
-  } else {
-    sendResponse(res, "Your are not authenticate user", false, 404);
+
+    // Send response with token
+    return sendResponse(res, "Your reset password token", false, 200, {
+      token,
+    });
+  } catch (error) {
+    // Handle unexpected errors
+    console.error(error);
+    return sendResponse(res, "An unexpected error occurred", true, 500);
   }
 };
 
@@ -86,4 +107,36 @@ const resetPassword = async (req, res, next) => {
   }
 };
 
-export { accountVerification, resetPasswordToken, resetPassword };
+const resendCode = async (req, res, next) => {
+  const { userID, tokenType } = req.body;
+
+  // Validate input
+  if (!userID) {
+    return sendResponse(res, "User ID is required", true, 400);
+  }
+
+  if (!tokenType) {
+    return sendResponse(res, "Token type is required", true, 400);
+  }
+
+  try {
+    // Find user by userID
+    const user = await findUser({ _id: new mongoose.Types.ObjectId(userID) });
+
+    // User not found
+    if (!user) {
+      return sendResponse(res, "User not found", true, 404);
+    }
+
+    // Generate token
+    const token = await generateToken(user._id, tokenType);
+
+    // Send response with token
+    return sendResponse(res, "Token generated successfully", false, 200, token);
+  } catch (error) {
+    console.error(`Error during token generation: ${error}`);
+    return sendResponse(res, "Internal Server Error", true, 500);
+  }
+};
+
+export { accountVerification, resetPasswordToken, resetPassword, resendCode };

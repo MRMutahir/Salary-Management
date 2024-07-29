@@ -76,30 +76,26 @@ const comparePassword = async (password, hashPassword) => {
   }
 };
 
-const accountVerificationCodeByEmail = async (userId) => {
+const generateToken = async (userId, tokenType) => {
   const buffer = crypto.randomBytes(3);
   const code = parseInt(buffer.toString("hex"), 16).toString().slice(0, 6);
 
   const token = await saveToken({
     userID: userId,
     token: code,
-    tokenType: "email-token",
+    tokenType: tokenType,
   });
 
   return token.token;
 };
 
+
+const accountVerificationCodeByEmail = async (userId) => {
+  return generateToken(userId, "email-token");
+};
+
 const generateResetPasswordToken = async (userId) => {
-  const buffer = crypto.randomBytes(3);
-  const code = parseInt(buffer.toString("hex"), 16).toString().slice(0, 6);
-
-  const token = await saveToken({
-    userID: userId,
-    token: code,
-    tokenType: "reset-password-token",
-  });
-
-  return token.token;
+  return generateToken(userId, "reset-password-token");
 };
 
 export {
@@ -111,4 +107,5 @@ export {
   comparePassword,
   accountVerificationCodeByEmail,
   generateResetPasswordToken,
+  generateToken
 };

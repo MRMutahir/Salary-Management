@@ -63,23 +63,28 @@ const login = async (req, res, next) => {
   try {
     const user = await findUser({ email });
 
+    if (!user) {
+      return sendResponse(res, "User not found", true, 404);
+    }
+
     const isPasswordValid = await comparePassword(password, user.password);
 
     if (!isPasswordValid) {
-      sendResponse(res, "Invalid Password", true, 200);
+      return sendResponse(res, "Invalid Password", true, 401);
+    } else {
+      if (!user.isVerified) {
+        return sendResponse(
+          res,
+          "User not Verified. Please verify your email before logging in.",
+          true,
+          403
+        );
+      }
+      return sendResponse(res, "Login successful", false, 200);
     }
-
-    sendResponse(
-      res,
-      "Congratulations, you have successfully logged in",
-      true,
-      200
-    );
   } catch (error) {
     next(error);
   }
 };
-
-
 
 export { register, login };
