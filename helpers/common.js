@@ -69,7 +69,7 @@ const hashPassword = async (password) => {
 const comparePassword = async (password, hashPassword) => {
   const isMatch = await bcrypt.compareSync(password, hashPassword);
   if (isMatch) {
-    console.log("isMatLogin successfulch", isMatch);
+    // console.log("isMatLogin successfulch", isMatch);
     return isMatch;
   } else {
     console.log("Invalid credentials", isMatch);
