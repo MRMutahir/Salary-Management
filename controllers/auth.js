@@ -5,7 +5,7 @@ import {
   sendResponse,
 } from "../helpers/common.js";
 import { sendEmail } from "../helpers/mailtrap.js";
-import { registerUser } from "../services/auth.js";
+import { authenticateByEmail, registerUser } from "../services/auth.js";
 import { findUser } from "../services/users.js";
 
 const register = async (req, res, next) => {
@@ -71,13 +71,16 @@ const login = async (req, res, next) => {
 
     if (!isPasswordValid) {
       return sendResponse(res, "Invalid Password", true, 401);
+      const authToken = await authenticateByEmail(email, password);
+      // if (!isPasswordValid) { return sendResponse(res, "Invalid Password", true, 401);
     } else {
       if (!user.isVerified) {
         return sendResponse(
           res,
           "User not Verified. Please verify your email before logging in.",
           true,
-          403
+          403,
+          authToken
         );
       }
       return sendResponse(res, "Login successful", false, 200);
