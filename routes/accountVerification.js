@@ -5,6 +5,7 @@ import {
   accountVerification,
   resetPasswordToken,
   resetPassword,
+  resendCode,
 } from "../controllers/accountVerification.js";
 
 const verificationRoutes = express.Router();
@@ -34,6 +35,15 @@ verificationRoutes.post(
   ],
   // validate,
   resetPassword
+);
+
+verificationRoutes.post(
+  "/resend-code",
+  [
+    check("userID").isEmail().withMessage("Enter a user ID"),
+    check("tokenType").isEmail().withMessage("Enter a token type"),
+  ],
+  resendCode
 );
 
 export { verificationRoutes };

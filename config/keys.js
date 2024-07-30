@@ -6,6 +6,7 @@ const envKeys = {
   EMAIL_TOKEN_EXPIRY: "12h",
   MAILTRAP_TOKEN: process.env.MAILTRAP_TOKEN,
   MAILTRAP_ENDPOINT: process.env.MAILTRAP_ENDPOINT,
+  JWT_SECRET: process.env.JWT_SECRET,
 };
 
 export { envKeys };
