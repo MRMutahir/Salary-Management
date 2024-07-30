@@ -13,7 +13,7 @@ const findUserAndUpdate = async (userId, updatePayload) => {
 };
 
 const findUser = async (payload) => {
-  console.log('payload', payload)
+  console.log("payload", payload);
   try {
     const user = await Users.findOne(payload);
     return user;
@@ -22,4 +22,13 @@ const findUser = async (payload) => {
   }
 };
 
-export { findUserAndUpdate, findUser };
+const findAllUser = async (query, option) => {
+  try {
+    const user = await Users.find(query, option);
+    return user;
+  } catch (error) {
+    throw Error(`Error find user >> ${error}`);
+  }
+};
+
+export { findUserAndUpdate, findUser, findAllUser };
