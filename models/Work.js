@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const workHistorySchema = new mongoose.Schema(
   {
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Users",
+      required: [true, "User ID is required"],
+    },
     jobTitle: {
       type: String,
       required: true,
