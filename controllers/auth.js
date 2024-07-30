@@ -5,7 +5,7 @@ import {
   sendResponse,
 } from "../helpers/common.js";
 import { sendEmail } from "../helpers/mailtrap.js";
-import { registerUser } from "../services/auth.js";
+import { authenticateByEmail, registerUser } from "../services/auth.js";
 import { findUser } from "../services/users.js";
 
 const register = async (req, res, next) => {
@@ -57,29 +57,42 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  if (!email) sendResponse(res, "Enter a valid email", false, 404);
-  if (!email) sendResponse(res, "Enter a valid password", false, 404);
+
+  if (!email) {
+    return sendResponse(res, "Enter a valid email", false, 400);
+  }
+
+  if (!password) {
+    return sendResponse(res, "Enter a valid password", false, 400);
+  }
 
   try {
     const user = await findUser({ email });
 
+    if (!user) {
+      return sendResponse(res, "User not found", false, 404);
+    }
+
     const isPasswordValid = await comparePassword(password, user.password);
 
     if (!isPasswordValid) {
-      sendResponse(res, "Invalid Password", true, 200);
+      return sendResponse(res, "Invalid Password", false, 401);
     }
 
-    sendResponse(
-      res,
-      "Congratulations, you have successfully logged in",
-      true,
-      200
-    );
+    if (!user.isVerified) {
+      return sendResponse(
+        res,
+        "User not verified. Please verify your email before logging in.",
+        false,
+        403
+      );
+    }
+
+    const authToken = await authenticateByEmail({email, password});
+    return sendResponse(res, "Login successful", true, 200, authToken);
   } catch (error) {
     next(error);
   }
 };
-
-
 
 export { register, login };
