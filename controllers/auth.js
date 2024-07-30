@@ -57,34 +57,39 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  if (!email) sendResponse(res, "Enter a valid email", false, 404);
-  if (!email) sendResponse(res, "Enter a valid password", false, 404);
+
+  if (!email) {
+    return sendResponse(res, "Enter a valid email", false, 400);
+  }
+
+  if (!password) {
+    return sendResponse(res, "Enter a valid password", false, 400);
+  }
 
   try {
     const user = await findUser({ email });
 
     if (!user) {
-      return sendResponse(res, "User not found", true, 404);
+      return sendResponse(res, "User not found", false, 404);
     }
 
     const isPasswordValid = await comparePassword(password, user.password);
 
     if (!isPasswordValid) {
-      return sendResponse(res, "Invalid Password", true, 401);
-      const authToken = await authenticateByEmail(email, password);
-      // if (!isPasswordValid) { return sendResponse(res, "Invalid Password", true, 401);
-    } else {
-      if (!user.isVerified) {
-        return sendResponse(
-          res,
-          "User not Verified. Please verify your email before logging in.",
-          true,
-          403,
-          authToken
-        );
-      }
-      return sendResponse(res, "Login successful", false, 200);
+      return sendResponse(res, "Invalid Password", false, 401);
     }
+
+    if (!user.isVerified) {
+      return sendResponse(
+        res,
+        "User not verified. Please verify your email before logging in.",
+        false,
+        403
+      );
+    }
+
+    const authToken = await authenticateByEmail({email, password});
+    return sendResponse(res, "Login successful", true, 200, authToken);
   } catch (error) {
     next(error);
   }

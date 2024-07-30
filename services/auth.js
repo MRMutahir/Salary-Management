@@ -1,8 +1,6 @@
 import { signToken } from "../config/jwt.js";
-import { sendResponse } from "../helpers/common.js";
+import { comparePassword } from "../helpers/common.js";
 import { Users } from "../models/Users.js";
-import bcrypt from "bcryptjs";
-// import messages from "../config/messages.js"; // Assuming messages contains error messages
 
 const registerUser = async (payload) => {
   try {
@@ -16,7 +14,10 @@ const registerUser = async (payload) => {
 const authenticateByEmail = async (payload) => {
   try {
     const user = await Users.findOne({ email: payload.email });
-    if (!user) throw new Error(`User not found: ${messages.accountNotExist}`);
+    if (!user)
+      throw new Error(
+        `User not found: No account exists with the provided email.`
+      );
     await validateUser(payload, user);
     return await generateJWTToken(user);
   } catch (error) {
@@ -26,16 +27,18 @@ const authenticateByEmail = async (payload) => {
 
 const validateUser = async (payload, user) => {
   if (!user) {
-    throw new Error(`Authentication failed: ${messages.accountNotExist}`);
+    throw new Error(
+      `Authentication failed: No account exists with the provided email.`
+    );
   }
   if (!comparePassword(payload.password || "", user.password)) {
-    throw new Error(`Authentication failed: ${messages.incorrectPassword}`);
+    throw new Error(`Authentication failed: Incorrect password.`);
   }
   if (!user.isVerified) {
-    throw new Error(`Authentication failed: ${messages.accountNotVerified}`);
+    throw new Error(`Authentication failed: The account is not verified.`);
   }
   if (!user.isEnabled) {
-    throw new Error(`Authentication failed: ${messages.accountNotActive}`);
+    throw new Error(`Authentication failed: The account is not active.`);
   }
 };
 

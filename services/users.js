@@ -13,6 +13,7 @@ const findUserAndUpdate = async (userId, updatePayload) => {
 };
 
 const findUser = async (payload) => {
+  console.log('payload', payload)
   try {
     const user = await Users.findOne(payload);
     return user;

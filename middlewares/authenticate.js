@@ -1,4 +1,5 @@
 import { verifyToken } from "../config/jwt.js";
+import { sendResponse } from "../helpers/common.js";
 
 const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -24,4 +25,4 @@ const authenticate = async (req, res, next) => {
   }
 };
 
-module.exports = authenticate;
+export { authenticate };

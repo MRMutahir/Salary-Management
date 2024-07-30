@@ -109,10 +109,16 @@ const resetPassword = async (req, res, next) => {
 
 const resendCode = async (req, res, next) => {
   const { userID, tokenType } = req.body;
+  console.log("userID", userID);
+  console.log("tokenType", tokenType);
 
   // Validate input
   if (!userID) {
     return sendResponse(res, "User ID is required", true, 400);
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(userID)) {
+    return sendResponse(res, "Invalid User ID format", true, 400);
   }
 
   if (!tokenType) {
@@ -121,7 +127,9 @@ const resendCode = async (req, res, next) => {
 
   try {
     // Find user by userID
+    console.log("try catch");
     const user = await findUser({ _id: new mongoose.Types.ObjectId(userID) });
+    console.log("user", user);
 
     // User not found
     if (!user) {
@@ -130,6 +138,7 @@ const resendCode = async (req, res, next) => {
 
     // Generate token
     const token = await generateToken(user._id, tokenType);
+    console.log("token", token);
 
     // Send response with token
     return sendResponse(res, "Token generated successfully", false, 200, token);
