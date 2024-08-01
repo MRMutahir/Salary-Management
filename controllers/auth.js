@@ -18,8 +18,7 @@ const register = async (req, res, next) => {
   if (!password) {
     return sendResponse(res, "Password is required", false, 400);
   }
-  console.log("password", password);
-  console.log("email", email);
+
 
   try {
     const existingUser = await findUser({ email });
