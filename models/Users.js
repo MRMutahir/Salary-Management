@@ -29,6 +29,7 @@ const UsersSchema = new mongoose.Schema(
       type: String,
       // required: [true, "Display name is required"],
       trim: true,
+      unique: true,
     },
     age: {
       type: Number,

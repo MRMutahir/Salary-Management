@@ -30,19 +30,20 @@ verificationRoutes.post(
 verificationRoutes.post(
   "/reset-password",
   [
-    check("code").isEmail().withMessage("Enter a valid code"),
-    check("newPassword").isEmail().withMessage("Enter a new password"),
+    check("code").notEmpty().withMessage("Enter a valid code"),
+    check("newPassword").notEmpty().withMessage("Enter a new password"),
   ],
-  // validate,
+  validate,
   resetPassword
 );
 
 verificationRoutes.post(
   "/resend-code",
   [
-    check("userID").isEmail().withMessage("Enter a user ID"),
-    check("tokenType").isEmail().withMessage("Enter a token type"),
+    check("userID").notEmpty().withMessage("Enter a user ID"),
+    check("tokenType").notEmpty().withMessage("Enter a token type"),
   ],
+  validate,
   resendCode
 );
 
