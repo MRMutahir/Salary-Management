@@ -4,6 +4,12 @@ import PinoColada from "pino-colada";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { saveToken } from "../services/tokenService.js";
+import {
+  uniqueNamesGenerator,
+  adjectives,
+  colors,
+} from "unique-names-generator";
+
 const { getLogger, configure } = pkg;
 
 configure({
@@ -89,7 +95,6 @@ const generateToken = async (userId, tokenType) => {
   return token.token;
 };
 
-
 const accountVerificationCodeByEmail = async (userId) => {
   return generateToken(userId, "email-token");
 };
@@ -98,6 +103,12 @@ const generateResetPasswordToken = async (userId) => {
   return generateToken(userId, "reset-password-token");
 };
 
+const generateDisplayName = async (firstName, lastName) => {
+  const uniqueId = crypto.randomBytes(3).toString("hex"); // 3 bytes = 6 hex characters
+
+  const displayName = `${firstName}.${lastName}.${uniqueId}`;
+  return displayName;
+};
 export {
   prettyLog,
   prettyErrorLog,
@@ -107,5 +118,6 @@ export {
   comparePassword,
   accountVerificationCodeByEmail,
   generateResetPasswordToken,
-  generateToken
+  generateToken,
+  generateDisplayName,
 };

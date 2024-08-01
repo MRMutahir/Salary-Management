@@ -7,6 +7,7 @@ const tokenSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
       required: true,
+      immutable: true, // This makes the field immutable
     },
     token: {
       type: String,

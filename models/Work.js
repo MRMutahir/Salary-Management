@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
-const workHistorySchema = new mongoose.Schema(
+const WorkExperienceSchema = new mongoose.Schema(
   {
     userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: [true, "User ID is required"],
+      immutable: true, // This makes the field immutable
     },
     jobTitle: {
       type: String,
@@ -36,9 +37,13 @@ const workHistorySchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
 
-const WorkHistory = mongoose.model("WorkHistory", workHistorySchema);
-export { WorkHistory };
+const WorkExperience = mongoose.model("WorkExperience", WorkExperienceSchema);
+export { WorkExperience };
