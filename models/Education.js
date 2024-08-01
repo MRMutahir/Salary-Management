@@ -6,6 +6,7 @@ const educationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: [true, "User ID is required"],
+      immutable: true, // This makes the field immutable
     },
     degree: {
       type: String,
