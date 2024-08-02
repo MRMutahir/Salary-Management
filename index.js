@@ -15,4 +15,3 @@ const server = app.listen(envKeys.port, async () => {
 });
 
  
-console.log("feature/sm-17-user-data-aggregation-api");
