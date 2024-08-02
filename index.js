@@ -13,4 +13,6 @@ const server = app.listen(envKeys.port, async () => {
   prettyLog(`http://localhost:${envKeys.port}`, "info");
   log2File(`http://localhost:${envKeys.port}`, "info");
 });
+
  
+console.log("feature/sm-17-user-data-aggregation-api");
