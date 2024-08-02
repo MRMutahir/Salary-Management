@@ -37,9 +37,13 @@ const educationSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
 
 const Education = mongoose.model("Education", educationSchema);
-export default Education;
+export { Education };
