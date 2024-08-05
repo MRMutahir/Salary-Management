@@ -3,55 +3,94 @@ import { Education } from "../models/Education.js";
 import { WorkExperience } from "../models/Work.js";
 import mongoose from "mongoose";
 
-const getUserData = async (userID, option, page, limit) => {
-  console.log("userID", userID);
-  console.log("option", option);
-  console.log("page", page);
-  console.log("limit", limit);
-
+const getUserData = async (userID, page = 1, limit = 10) => {
   try {
-    // Assuming you have a MongoDB collection named "users"
-
-
-    // Setting up the aggregation pipeline
     const pipeline = [
       {
-        $match: { _id: userID }, // Match the user by ID
+        $match: { _id: new mongoose.Types.ObjectId(userID) }, // Match the user by ID
       },
       {
-        $lookup: {
-          from: "workexperiences", // The collection to join
-          localField: "_id", // The field from the input documents
-          foreignField: "userID", // The field from the documents of the "from" collection
-          as: "workHistory", // The output array field
+        $project: {
+          email: 1,
+          isVerified: 1,
+          age: 1,
+          displayName: 1,
+          nicNumber: 1,
+          profileImage: 1,
+          relationshipStatus: 1,
         },
       },
       {
-        $lookup: {
-          from: "educations", // The collection to join
-          localField: "_id",
-          foreignField: "userID",
-          as: "education",
-        },
+        $skip: (page - 1) * limit, // Skip documents based on the current page
       },
       {
-        $facet: {
-          userData: [{ $limit: 1 }],
-          workHistory: [{ $skip: (page - 1) * limit }, { $limit: limit }],
-          education: [{ $skip: (page - 1) * limit }, { $limit: limit }],
-        },
+        $limit: limit, // Limit the number of documents returned
       },
     ];
-
-    // Executing the aggregation pipeline
-    const results = await Users.aggregate(pipeline)
-    console.log('results', results)
-
-    // Returning the results
-    return results;
+    const results = await Users.aggregate(pipeline);
+    return results[0] || null; // Return null if no results are found
   } catch (error) {
     throw new Error(`Error fetching user data: ${error.message}`);
   }
 };
 
-export { getUserData };
+const getUserWorkData = async (userID, page = 1, limit = 10) => {
+  try {
+    const pipeline = [
+      {
+        $match: { userID: new mongoose.Types.ObjectId(userID) }, // Match the user by ID
+      },
+      {
+        $project: {
+          jobTitle: 1,
+          company: 1,
+          startDate: 1,
+          currentlyWorking: 1,
+          endDate: 1,
+        },
+      },
+      {
+        $skip: (page - 1) * limit, // Skip documents based on the current page
+      },
+      {
+        $limit: limit, // Limit the number of documents returned
+      },
+    ];
+    const results = await WorkExperience.aggregate(pipeline);
+    return results;
+  } catch (error) {
+    throw new Error(`Error fetching user work data: ${error.message}`);
+  }
+};
+
+const getUserEducationData = async (userID, page = 1, limit = 10) => {
+  try {
+    const pipeline = [
+      {
+        $match: { userID: new mongoose.Types.ObjectId(userID) }, // Match the user by ID
+      },
+      {
+        $project: {
+          degree: 1,
+          institution: 1,
+          startDate: 1,
+          endDate: 1,
+          fieldOfStudy: 1,
+          currentlyStudying: 1,
+        },
+      },
+      {
+        $skip: (page - 1) * limit, // Skip documents based on the current page
+      },
+      {
+        $limit: limit, // Limit the number of documents returned
+      },
+    ];
+    const results = await Education.aggregate(pipeline);
+    return results;
+  } catch (error) {
+    throw new Error(`Error fetching user education data: ${error.message}`);
+  }
+};
+
+export { getUserData, getUserWorkData, getUserEducationData };
