@@ -496,6 +496,12 @@
 [2024-08-01T18:42:14.689] [INFO] info - http://localhost:3000
 [2024-08-01T18:42:54.537] [INFO] info - DB connected successfully
 [2024-08-01T18:42:54.541] [INFO] info - http://localhost:3000
+<<<<<<< HEAD
+[2024-08-20T13:12:41.171] [INFO] info - DB connected successfully
+[2024-08-20T13:12:41.174] [INFO] info - http://localhost:3000
+[2024-10-25T14:56:36.342] [INFO] info - http://localhost:5500
+[2024-10-25T14:57:04.623] [INFO] info - http://localhost:5500
+=======
 [2024-08-02T11:42:12.765] [INFO] info - DB connected successfully
 [2024-08-02T11:42:12.767] [INFO] info - http://localhost:3000
 [2024-08-02T11:50:24.626] [INFO] info - DB connected successfully
@@ -602,3 +608,4 @@
 [2024-08-02T18:40:32.081] [INFO] info - http://localhost:3000
 [2024-08-02T18:41:10.859] [INFO] info - DB connected successfully
 [2024-08-02T18:41:10.861] [INFO] info - http://localhost:3000
+>>>>>>> ed25b75aa1374923f23cb8a3365a743b187f3fba
