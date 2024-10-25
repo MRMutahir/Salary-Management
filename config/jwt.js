@@ -7,7 +7,7 @@ const signToken = async (payload) => {
   const token = await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("8h")
+    .setExpirationTime("7d")
     .sign(jwt_Secret);
   return token;
 };

@@ -4,11 +4,7 @@ import PinoColada from "pino-colada";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { saveToken } from "../services/tokenService.js";
-import {
-  uniqueNamesGenerator,
-  adjectives,
-  colors,
-} from "unique-names-generator";
+
 
 const { getLogger, configure } = pkg;
 

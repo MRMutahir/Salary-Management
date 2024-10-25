@@ -19,7 +19,6 @@ const register = async (req, res, next) => {
     return sendResponse(res, "Password is required", false, 400);
   }
 
-
   try {
     const existingUser = await findUser({ email });
     if (existingUser) {
@@ -38,12 +37,12 @@ const register = async (req, res, next) => {
       code: verificationCode,
       category: "account verification email",
     };
-    await sendEmail(
-      user.email,
-      emailPayload.obj,
-      emailPayload.code,
-      emailPayload.category
-    );
+    // await sendEmail(
+    //   user.email,
+    //   emailPayload.obj,
+    //   emailPayload.code,
+    //   emailPayload.category
+    // );
     if (user) {
       return sendResponse(res, `User registered successfully`, true, 201);
     } else {
@@ -87,7 +86,7 @@ const login = async (req, res, next) => {
       );
     }
 
-    const authToken = await authenticateByEmail({email, password});
+    const authToken = await authenticateByEmail({ email, password });
     return sendResponse(res, "Login successful", true, 200, authToken);
   } catch (error) {
     next(error);

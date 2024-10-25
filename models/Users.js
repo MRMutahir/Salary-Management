@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const UsersSchema = new mongoose.Schema(
   {
     email: {
+      unique: true,
       type: String,
       required: [true, "Email is required"],
       trim: true,
-      unique: true,
       lowercase: true,
       match: [/.+\@.+\..+/, "Please enter a valid email address"],
     },
@@ -24,12 +24,6 @@ const UsersSchema = new mongoose.Schema(
       type: String,
       // required: [true, "Last name is required"],
       trim: true,
-    },
-    displayName: {
-      type: String,
-      // required: [true, "Display name is required"],
-      trim: true,
-      unique: true,
     },
     age: {
       type: Number,
@@ -54,6 +48,7 @@ const UsersSchema = new mongoose.Schema(
       // required: [true, "NIC number is required"],
       unique: true,
       trim: true,
+      default: null,
     },
     relationshipStatus: {
       type: String,
