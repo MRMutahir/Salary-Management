@@ -70,45 +70,45 @@ const createWorkExperience = async (req, res, next) => {
   }
 };
 
-// const updateWorkExperience = async (req, res, next) => {
-//   try {
-//     const reqBody = req.body;
-//     const payload = {};
-//     const work = await workExperienceFind({
-//       userID: new mongoose.Types.ObjectId(reqBody.userID),
-//       isDeleted: false,
-//     });
+const updateWorkExperience = async (req, res, next) => {
+  try {
+    const reqBody = req.body;
+    const payload = {};
+    const work = await workExperienceFind({
+      userID: new mongoose.Types.ObjectId(reqBody.userID),
+      isDeleted: false,
+    });
 
-//     if (!work) {
-//       return sendResponse(res, "Work Experience not found", false, 404);
-//     }
+    if (!work) {
+      return sendResponse(res, "Work Experience not found", false, 404);
+    }
 
-//     for (const [key, value] of Object.entries(reqBody)) {
-//       if (value !== undefined && value !== null && value !== "") {
-//         payload[key] = value;
-//       }
-//     }
+    for (const [key, value] of Object.entries(reqBody)) {
+      if (value !== undefined && value !== null && value !== "") {
+        payload[key] = value;
+      }
+    }
 
-//     const updatedExperience = await workExperienceFindByIDAndUpdate(
-//       { userID: user._id },
-//       payload
-//     );
+    const updatedExperience = await workExperienceFindByIDAndUpdate(
+      { _id: work._id },
+      payload
+    );
 
-//     if (updatedExperience) {
-//       return sendResponse(
-//         res,
-//         "Work Experience updated successfully",
-//         true,
-//         200
-//       );
-//     } else {
-//       return sendResponse(res, "Failed to update Work Experience", false, 404);
-//     }
-//   } catch (error) {
-//     console.error(`Error updating work experience: ${error.message}`);
-//     next(error);
-//   }
-// };
+    if (updatedExperience) {
+      return sendResponse(
+        res,
+        "Work Experience updated successfully",
+        true,
+        200
+      );
+    } else {
+      return sendResponse(res, "Failed to update Work Experience", false, 404);
+    }
+  } catch (error) {
+    console.error(`Error updating work experience: ${error.message}`);
+    next(error);
+  }
+};
 
 const getWorkExperienceById = async (req, res, next) => {
   try {
@@ -164,7 +164,7 @@ const deleteWorkExperienceById = async (req, res, next) => {
 
 export {
   createWorkExperience,
-  // updateWorkExperience,
+  updateWorkExperience,
   getWorkExperienceById,
   deleteWorkExperienceById,
 };

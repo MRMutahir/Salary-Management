@@ -496,7 +496,116 @@
 [2024-08-01T18:42:14.689] [INFO] info - http://localhost:3000
 [2024-08-01T18:42:54.537] [INFO] info - DB connected successfully
 [2024-08-01T18:42:54.541] [INFO] info - http://localhost:3000
+<<<<<<< HEAD
 [2024-08-20T13:12:41.171] [INFO] info - DB connected successfully
 [2024-08-20T13:12:41.174] [INFO] info - http://localhost:3000
 [2024-10-25T14:56:36.342] [INFO] info - http://localhost:5500
 [2024-10-25T14:57:04.623] [INFO] info - http://localhost:5500
+=======
+[2024-08-02T11:42:12.765] [INFO] info - DB connected successfully
+[2024-08-02T11:42:12.767] [INFO] info - http://localhost:3000
+[2024-08-02T11:50:24.626] [INFO] info - DB connected successfully
+[2024-08-02T11:50:24.629] [INFO] info - http://localhost:3000
+[2024-08-02T11:50:45.388] [INFO] info - DB connected successfully
+[2024-08-02T11:50:45.391] [INFO] info - http://localhost:3000
+[2024-08-02T11:58:22.687] [INFO] info - DB connected successfully
+[2024-08-02T11:58:22.688] [INFO] info - http://localhost:3000
+[2024-08-02T11:58:33.916] [INFO] info - DB connected successfully
+[2024-08-02T11:58:33.918] [INFO] info - http://localhost:3000
+[2024-08-02T11:58:53.024] [INFO] info - DB connected successfully
+[2024-08-02T11:58:53.026] [INFO] info - http://localhost:3000
+[2024-08-02T11:59:02.620] [INFO] info - DB connected successfully
+[2024-08-02T11:59:02.623] [INFO] info - http://localhost:3000
+[2024-08-02T11:59:38.427] [INFO] info - DB connected successfully
+[2024-08-02T11:59:38.430] [INFO] info - http://localhost:3000
+[2024-08-02T12:18:20.159] [INFO] info - DB connected successfully
+[2024-08-02T12:18:20.161] [INFO] info - http://localhost:3000
+[2024-08-02T12:19:58.645] [INFO] info - DB connected successfully
+[2024-08-02T12:19:58.649] [INFO] info - http://localhost:3000
+[2024-08-02T12:20:12.842] [INFO] info - DB connected successfully
+[2024-08-02T12:20:12.844] [INFO] info - http://localhost:3000
+[2024-08-02T12:20:45.182] [INFO] info - DB connected successfully
+[2024-08-02T12:20:45.183] [INFO] info - http://localhost:3000
+[2024-08-02T12:21:52.660] [INFO] info - DB connected successfully
+[2024-08-02T12:21:52.662] [INFO] info - http://localhost:3000
+[2024-08-02T12:23:28.912] [INFO] info - DB connected successfully
+[2024-08-02T12:23:28.913] [INFO] info - http://localhost:3000
+[2024-08-02T12:24:04.112] [INFO] info - DB connected successfully
+[2024-08-02T12:24:04.114] [INFO] info - http://localhost:3000
+[2024-08-02T12:53:23.602] [INFO] info - DB connected successfully
+[2024-08-02T12:53:23.604] [INFO] info - http://localhost:3000
+[2024-08-02T12:53:42.925] [INFO] info - DB connected successfully
+[2024-08-02T12:53:42.928] [INFO] info - http://localhost:3000
+[2024-08-02T12:54:13.801] [INFO] info - DB connected successfully
+[2024-08-02T12:54:13.803] [INFO] info - http://localhost:3000
+[2024-08-02T12:54:41.947] [INFO] info - DB connected successfully
+[2024-08-02T12:54:41.949] [INFO] info - http://localhost:3000
+[2024-08-02T12:55:19.421] [INFO] info - DB connected successfully
+[2024-08-02T12:55:19.422] [INFO] info - http://localhost:3000
+[2024-08-02T12:55:26.287] [INFO] info - DB connected successfully
+[2024-08-02T12:55:26.290] [INFO] info - http://localhost:3000
+[2024-08-02T12:55:42.323] [INFO] info - DB connected successfully
+[2024-08-02T12:55:42.326] [INFO] info - http://localhost:3000
+[2024-08-02T12:55:58.592] [INFO] info - DB connected successfully
+[2024-08-02T12:55:58.595] [INFO] info - http://localhost:3000
+[2024-08-02T13:08:41.162] [INFO] info - DB connected successfully
+[2024-08-02T13:08:41.165] [INFO] info - http://localhost:3000
+[2024-08-02T13:09:00.168] [INFO] info - DB connected successfully
+[2024-08-02T13:09:00.171] [INFO] info - http://localhost:3000
+[2024-08-02T13:10:42.595] [INFO] info - DB connected successfully
+[2024-08-02T13:10:42.598] [INFO] info - http://localhost:3000
+[2024-08-02T13:10:55.575] [INFO] info - DB connected successfully
+[2024-08-02T13:10:55.576] [INFO] info - http://localhost:3000
+[2024-08-02T13:14:22.461] [INFO] info - DB connected successfully
+[2024-08-02T13:14:22.463] [INFO] info - http://localhost:3000
+[2024-08-02T13:14:32.990] [INFO] info - DB connected successfully
+[2024-08-02T13:14:32.991] [INFO] info - http://localhost:3000
+[2024-08-02T14:14:17.262] [INFO] info - DB connected successfully
+[2024-08-02T14:14:17.265] [INFO] info - http://localhost:3000
+[2024-08-02T14:14:36.174] [INFO] info - DB connected successfully
+[2024-08-02T14:14:36.176] [INFO] info - http://localhost:3000
+[2024-08-02T14:14:59.211] [INFO] info - DB connected successfully
+[2024-08-02T14:14:59.212] [INFO] info - http://localhost:3000
+[2024-08-02T14:15:18.057] [INFO] info - DB connected successfully
+[2024-08-02T14:15:18.059] [INFO] info - http://localhost:3000
+[2024-08-02T14:16:05.228] [INFO] info - DB connected successfully
+[2024-08-02T14:16:05.231] [INFO] info - http://localhost:3000
+[2024-08-02T14:16:18.983] [INFO] info - DB connected successfully
+[2024-08-02T14:16:18.986] [INFO] info - http://localhost:3000
+[2024-08-02T14:16:25.355] [INFO] info - DB connected successfully
+[2024-08-02T14:16:25.360] [INFO] info - http://localhost:3000
+[2024-08-02T14:16:38.159] [INFO] info - DB connected successfully
+[2024-08-02T14:16:38.161] [INFO] info - http://localhost:3000
+[2024-08-02T15:22:35.298] [INFO] info - DB connected successfully
+[2024-08-02T15:22:35.300] [INFO] info - http://localhost:3000
+[2024-08-02T15:23:00.411] [INFO] info - DB connected successfully
+[2024-08-02T15:23:00.413] [INFO] info - http://localhost:3000
+[2024-08-02T15:24:38.329] [INFO] info - DB connected successfully
+[2024-08-02T15:24:38.332] [INFO] info - http://localhost:3000
+[2024-08-02T15:24:45.607] [INFO] info - DB connected successfully
+[2024-08-02T15:24:45.609] [INFO] info - http://localhost:3000
+[2024-08-02T15:25:18.513] [INFO] info - DB connected successfully
+[2024-08-02T15:25:18.515] [INFO] info - http://localhost:3000
+[2024-08-02T15:26:34.964] [INFO] info - DB connected successfully
+[2024-08-02T15:26:34.965] [INFO] info - http://localhost:3000
+[2024-08-02T18:33:24.279] [INFO] info - DB connected successfully
+[2024-08-02T18:33:24.281] [INFO] info - http://localhost:3000
+[2024-08-02T18:36:57.560] [INFO] info - DB connected successfully
+[2024-08-02T18:36:57.564] [INFO] info - http://localhost:3000
+[2024-08-02T18:37:27.106] [INFO] info - DB connected successfully
+[2024-08-02T18:37:27.108] [INFO] info - http://localhost:3000
+[2024-08-02T18:38:43.154] [INFO] info - DB connected successfully
+[2024-08-02T18:38:43.156] [INFO] info - http://localhost:3000
+[2024-08-02T18:39:06.703] [INFO] info - DB connected successfully
+[2024-08-02T18:39:06.705] [INFO] info - http://localhost:3000
+[2024-08-02T18:39:54.649] [INFO] info - DB connected successfully
+[2024-08-02T18:39:54.651] [INFO] info - http://localhost:3000
+[2024-08-02T18:40:04.597] [INFO] info - DB connected successfully
+[2024-08-02T18:40:04.599] [INFO] info - http://localhost:3000
+[2024-08-02T18:40:20.541] [INFO] info - DB connected successfully
+[2024-08-02T18:40:20.543] [INFO] info - http://localhost:3000
+[2024-08-02T18:40:32.080] [INFO] info - DB connected successfully
+[2024-08-02T18:40:32.081] [INFO] info - http://localhost:3000
+[2024-08-02T18:41:10.859] [INFO] info - DB connected successfully
+[2024-08-02T18:41:10.861] [INFO] info - http://localhost:3000
+>>>>>>> ed25b75aa1374923f23cb8a3365a743b187f3fba
