@@ -45,8 +45,8 @@ const UsersSchema = new mongoose.Schema(
     },
     nicNumber: {
       type: String,
-      // required: [true, "NIC number is required"],
-      unique: true,
+      required: [false, "NIC number is required"],
+      // unique: true,
       trim: true,
       default: null,
     },

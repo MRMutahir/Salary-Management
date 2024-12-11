@@ -10,8 +10,8 @@ authRoutes.post(
   "/register",
   check("email").isEmail().withMessage("Enter a valid email"),
   check("password")
-    .isLength({ min: 15 })
-    .withMessage("Password must be at least 15 characters long"),
+    .isLength({ min: 5 })
+    .withMessage("Password must be at least 5 characters long"),
   validate,
   register
 );
@@ -20,8 +20,8 @@ authRoutes.post(
   "/login",
   check("email").isEmail().withMessage("Enter a valid email"),
   check("password")
-    .isLength({ min: 15 })
-    .withMessage("Password must be at least 15 characters long"),
+    .isLength({ min: 5 })
+    .withMessage("Password must be at least 5 characters long"),
   validate,
   login
 );
