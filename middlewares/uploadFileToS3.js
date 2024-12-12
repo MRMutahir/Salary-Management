@@ -1,4 +1,5 @@
 import multer from "multer"
+import { envKeys } from "../config/keys.js";
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -11,11 +12,11 @@ const storage = multer.diskStorage({
 export const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-            cb(null, true);
-        } else {
-            cb(new multer.MulterError('Invalid file type'));
+        if (!envKeys.PROFILE_IMAGE_TYPE.includes(file.mimetype)) {
+            cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"))
         }
+
+        cb(null, true);
     },
     limits: { fileSize: 1000000 },
-});
+});  

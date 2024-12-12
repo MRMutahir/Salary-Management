@@ -171,7 +171,7 @@ const allProfile = async (req, res, next) => {
 };
 
 const uploadImage = async (req, res, next) => {
-
+  const file = req.file
   console.log('file', file)
   console.log('req.file', req.file)
   return sendResponse(

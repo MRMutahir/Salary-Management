@@ -12,6 +12,7 @@ const envKeys = {
   AWS_ACCESSKEYID: process.env.AWS_ACCESSKEYID,
   AWS_SECRETACCESSKEY: process.env.AWS_SECRETACCESSKEY,
   AWS_REGION: process.env.AWS_REGION,
+  PROFILE_IMAGE_TYPE: ["image/jpeg", "image/jpg", "image/png"],
 };
 
 export { envKeys };

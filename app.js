@@ -3,6 +3,7 @@ import { connectDb } from "./middlewares/mongodb.js";
 import { envKeys } from "./config/keys.js";
 import { routes } from "./routes/routes.js";
 import { prettyLog, log2File } from "./helpers/common.js";
+import { errorHandler } from "./middlewares/errorMiddleware.js";
 // import RouteList from "route-list";
 const app = express();
 app.use(express.json());
@@ -20,3 +21,5 @@ const server = app.listen(envKeys.port, async () => {
   prettyLog(`http://localhost:${envKeys.port}`, "info");
   log2File(`http://localhost:${envKeys.port}`, "info");
 });
+
+app.use(errorHandler)
