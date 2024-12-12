@@ -5,9 +5,11 @@ import {
   getProfile,
   deleteProfile,
   allProfile,
+  uploadImage,
 } from "../controllers/users.js";
-import { validate } from "../middlewares/validate.js";
+import { checkFileExistsInReq, validate } from "../middlewares/validate.js";
 import { body, param } from "express-validator";
+import { upload } from "../middlewares/uploadFileToS3.js";
 
 const userRoutes = express.Router();
 
@@ -86,6 +88,8 @@ userRoutes.delete(
 );
 
 userRoutes.get("/profiles", allProfile);
+
+userRoutes.post("/image/upload", upload.single("file"), checkFileExistsInReq, uploadImage);
 
 // Export routes
 export { userRoutes };

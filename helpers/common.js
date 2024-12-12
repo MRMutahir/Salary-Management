@@ -105,6 +105,9 @@ const generateDisplayName = async (firstName, lastName) => {
   const displayName = `${firstName}.${lastName}.${uniqueId}`;
   return displayName;
 };
+
+
+
 export {
   prettyLog,
   prettyErrorLog,
@@ -115,5 +118,5 @@ export {
   accountVerificationCodeByEmail,
   generateResetPasswordToken,
   generateToken,
-  generateDisplayName,
+  generateDisplayName
 };

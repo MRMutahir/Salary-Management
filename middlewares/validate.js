@@ -1,4 +1,5 @@
 import { validationResult } from "express-validator";
+import { sendResponse } from "../helpers/common.js";
 const validate = async (req, res, next) => {
   const errors = validationResult(req);
   const error = {};
@@ -9,4 +10,13 @@ const validate = async (req, res, next) => {
   next();
 };
 
-export { validate };
+const checkFileExistsInReq = async (req, res, next) => {
+  const file = req.file
+  if (!file) {
+    return sendResponse(res, "file required", false, 400);
+  }
+  next()
+};
+
+
+export { validate, checkFileExistsInReq };

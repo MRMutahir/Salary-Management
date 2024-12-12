@@ -170,4 +170,17 @@ const allProfile = async (req, res, next) => {
   }
 };
 
-export { createProfile, getProfile, deleteProfile, allProfile, updateProfile };
+const uploadImage = async (req, res, next) => {
+
+  console.log('file', file)
+  console.log('req.file', req.file)
+  return sendResponse(
+    res,
+    "file retrieved successfully",
+    true,
+    200,
+    file
+  );
+}
+
+export { createProfile, getProfile, deleteProfile, allProfile, updateProfile, uploadImage };

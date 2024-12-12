@@ -8,6 +8,7 @@ const connectDb = async () => {
     prettyLog(`DB connected successfully`, "info");
     log2File(`DB connected successfully`, "info");
   } catch (error) {
+    console.log('error', error)
     prettyErrorLog(`DB connection failed: ${error.message}`);
     log2File(`http://localhost:${envKeys.port}`, "error");
   }
